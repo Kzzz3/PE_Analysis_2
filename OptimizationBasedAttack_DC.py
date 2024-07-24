@@ -16,24 +16,22 @@ arrZigZag_8 = np.array([[0, 1, 5, 6, 14, 15, 27, 28],
                         [21, 34, 37, 47, 50, 56, 59, 61],
                         [35, 36, 48, 49, 57, 58, 62, 63]])
 
-arrZigZag_16 = np.array([
-    [0, 1, 5, 6, 14, 15, 27, 28, 44, 45, 65, 66, 90, 91, 119, 120],
-    [2, 4, 7, 13, 16, 26, 29, 43, 46, 64, 67, 89, 92, 118, 121, 150],
-    [3, 8, 12, 17, 25, 30, 42, 47, 63, 68, 88, 93, 117, 122, 149, 151],
-    [9, 11, 18, 24, 31, 41, 48, 62, 69, 87, 94, 116, 123, 148, 152, 177],
-    [10, 19, 23, 32, 40, 49, 61, 70, 86, 95, 115, 124, 147, 153, 176, 178],
-    [20, 22, 33, 39, 50, 60, 71, 85, 96, 114, 125, 146, 154, 175, 179, 200],
-    [21, 34, 38, 51, 59, 72, 84, 97, 113, 126, 145, 155, 174, 180, 199, 201],
-    [35, 37, 52, 58, 73, 83, 98, 112, 127, 144, 156, 173, 181, 198, 202, 219],
-    [36, 53, 57, 74, 82, 99, 111, 128, 143, 157, 172, 182, 197, 203, 218, 220],
-    [54, 56, 75, 81, 100, 110, 129, 142, 158, 171, 183, 196, 204, 217, 221, 234],
-    [55, 76, 80, 101, 109, 130, 141, 159, 170, 184, 195, 205, 216, 222, 233, 235],
-    [77, 79, 102, 108, 131, 140, 160, 169, 185, 194, 206, 215, 223, 232, 236, 245],
-    [78, 103, 107, 132, 139, 161, 168, 186, 193, 207, 214, 224, 231, 237, 244, 246],
-    [104, 106, 133, 138, 162, 167, 187, 192, 208, 213, 225, 230, 238, 243, 247, 252],
-    [105, 134, 137, 163, 166, 188, 191, 209, 212, 226, 229, 239, 242, 248, 251, 253],
-    [135, 136, 164, 165, 189, 190, 210, 211, 227, 228, 240, 241, 249, 250, 254, 255]
-])
+arrZigZag_16 = np.array([[0, 1, 5, 6, 14, 15, 27, 28, 44, 45, 65, 66, 90, 91, 119, 120],
+                         [2, 4, 7, 13, 16, 26, 29, 43, 46, 64, 67, 89, 92, 118, 121, 150],
+                         [3, 8, 12, 17, 25, 30, 42, 47, 63, 68, 88, 93, 117, 122, 149, 151],
+                         [9, 11, 18, 24, 31, 41, 48, 62, 69, 87, 94, 116, 123, 148, 152, 177],
+                         [10, 19, 23, 32, 40, 49, 61, 70, 86, 95, 115, 124, 147, 153, 176, 178],
+                         [20, 22, 33, 39, 50, 60, 71, 85, 96, 114, 125, 146, 154, 175, 179, 200],
+                         [21, 34, 38, 51, 59, 72, 84, 97, 113, 126, 145, 155, 174, 180, 199, 201],
+                         [35, 37, 52, 58, 73, 83, 98, 112, 127, 144, 156, 173, 181, 198, 202, 219],
+                         [36, 53, 57, 74, 82, 99, 111, 128, 143, 157, 172, 182, 197, 203, 218, 220],
+                         [54, 56, 75, 81, 100, 110, 129, 142, 158, 171, 183, 196, 204, 217, 221, 234],
+                         [55, 76, 80, 101, 109, 130, 141, 159, 170, 184, 195, 205, 216, 222, 233, 235],
+                         [77, 79, 102, 108, 131, 140, 160, 169, 185, 194, 206, 215, 223, 232, 236, 245],
+                         [78, 103, 107, 132, 139, 161, 168, 186, 193, 207, 214, 224, 231, 237, 244, 246],
+                         [104, 106, 133, 138, 162, 167, 187, 192, 208, 213, 225, 230, 238, 243, 247, 252],
+                         [105, 134, 137, 163, 166, 188, 191, 209, 212, 226, 229, 239, 242, 248, 251, 253],
+                         [135, 136, 164, 165, 189, 190, 210, 211, 227, 228, 240, 241, 249, 250, 254, 255]])
 
 matIct_8 = np.array([[1, 1, 1, 1, 1, 1, 1, 1],
                      [5, 3, 2, 1, -1, -2, -3, -5],
@@ -42,26 +40,25 @@ matIct_8 = np.array([[1, 1, 1, 1, 1, 1, 1, 1],
                      [1, -1, -1, 1, 1, -1, -1, 1],
                      [2, -5, 1, 3, -3, -1, 5, -2],
                      [1, -3, 3, -1, -1, 3, -3, 1],
-                     [1, -2, 3, -5, 5, -3, 2, -1]], dtype=np.float64)
+                     [1, -2, 3, -5, 5, -3, 2, -1]])
 
-matIct_16 = np.array([
-    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    [4, 4, 0, 2, 2, 4, 0, 0, 0, 0, -4, -2, -2, 0, -4, -4],
-    [4, 2, 2, 0, 0, -2, -2, -4, -4, -2, -2, 0, 0, 2, 2, 4],
-    [4, 2, 0, -4, 0, -4, -2, 0, 0, 2, 4, 0, 4, 0, -2, -4],
-    [4, 1, -1, -4, -4, -1, 1, 4, 4, 1, -1, -4, -4, -1, 1, 4],
-    [0, 0, -2, -4, 0, 2, 4, 4, -4, -4, -2, 0, 4, 2, 0, 0],
-    [2, 0, -4, -2, 2, 4, 0, -2, -2, 0, 4, 2, -2, -4, 0, 2],
-    [2, -4, -4, 0, 4, 0, 0, -2, 2, 0, 0, -4, 0, 4, 4, -2],
-    [2, -2, -2, 2, 2, -2, -2, 2, 2, -2, -2, 2, 2, -2, -2, 2],
-    [2, 0, 0, 4, 0, -4, 4, 2, -2, -4, 4, 0, -4, 0, 0, -2],
-    [2, -4, 0, 2, -2, 0, 4, -2, -2, 4, 0, -2, 2, 0, -4, 2],
-    [4, -4, 2, 0, -4, 2, 0, 0, 0, 0, -2, 4, 0, -2, 4, -4],
-    [1, -4, 4, -1, -1, 4, -4, 1, 1, -4, 4, -1, -1, 4, -4, 1],
-    [0, -2, 4, 0, 4, 0, -2, 4, -4, 2, 0, -4, 0, -4, 2, 0],
-    [0, -2, 2, -4, 4, -2, 2, 0, 0, 2, -2, 4, -4, 2, -2, 0],
-    [0, 0, 4, -2, 2, 0, 4, -4, 4, -4, 0, -2, 2, -4, 0, 0]
-], dtype=np.float64)
+matIct_16 = np.array([[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                      [4, 4, 0, 2, 2, 4, 0, 0, 0, 0, -4, -2, -2, 0, -4, -4],
+                      [4, 2, 2, 0, 0, -2, -2, -4, -4, -2, -2, 0, 0, 2, 2, 4],
+                      [4, 2, 0, -4, 0, -4, -2, 0, 0, 2, 4, 0, 4, 0, -2, -4],
+                      [4, 1, -1, -4, -4, -1, 1, 4, 4, 1, -1, -4, -4, -1, 1, 4],
+                      [0, 0, -2, -4, 0, 2, 4, 4, -4, -4, -2, 0, 4, 2, 0, 0],
+                      [2, 0, -4, -2, 2, 4, 0, -2, -2, 0, 4, 2, -2, -4, 0, 2],
+                      [2, -4, -4, 0, 4, 0, 0, -2, 2, 0, 0, -4, 0, 4, 4, -2],
+                      [2, -2, -2, 2, 2, -2, -2, 2, 2, -2, -2, 2, 2, -2, -2, 2],
+                      [2, 0, 0, 4, 0, -4, 4, 2, -2, -4, 4, 0, -4, 0, 0, -2],
+                      [2, -4, 0, 2, -2, 0, 4, -2, -2, 4, 0, -2, 2, 0, -4, 2],
+                      [4, -4, 2, 0, -4, 2, 0, 0, 0, 0, -2, 4, 0, -2, 4, -4],
+                      [1, -4, 4, -1, -1, 4, -4, 1, 1, -4, 4, -1, -1, 4, -4, 1],
+                      [0, -2, 4, 0, 4, 0, -2, 4, -4, 2, 0, -4, 0, -4, 2, 0],
+                      [0, -2, 2, -4, 4, -2, 2, 0, 0, 2, -2, 4, -4, 2, -2, 0],
+                      [0, 0, 4, -2, 2, 0, 4, -4, 4, -4, 0, -2, 2, -4, 0, 0]])
+
 
 def ComputeContributionMatrix():
     a = np.zeros([8, 8, 8, 8], dtype=np.float64)
@@ -74,10 +71,10 @@ def ComputeContributionMatrix():
     return a
 
 
-def PreProcess(strInputImagePath:str,
-               nRegionSize:int,
-               nStartIndex:int,
-               nSpan:int):
+def PreProcess(strInputImagePath: str,
+               nRegionSize: int,
+               nStartIndex: int,
+               nSpan: int):
     # ICT and Zigzag
     matIct = np.zeros((nRegionSize // 8, nRegionSize // 8), dtype=np.float64)
     matZigzag = np.zeros((nRegionSize // 8, nRegionSize // 8), dtype=np.float64)
@@ -110,15 +107,15 @@ def PreProcess(strInputImagePath:str,
             arrDcDct[nRow // 8, nCol // 8] = arrDCT[nRow, nCol]
 
     nDcHeight, nDcWidth = arrDcDct.shape
-    for nRow in range(0, nDcHeight, nRegionSize//8):
-        for nCol in range(0, nDcWidth, nRegionSize//8):
-            arrDcDct[nRow:nRow + nRegionSize//8, nCol:nCol + nRegionSize//8] = matIct.T @ arrDcDct[nRow:nRow + nRegionSize//8, nCol:nCol + nRegionSize//8] @ matIct
+    for nRow in range(0, nDcHeight, nRegionSize // 8):
+        for nCol in range(0, nDcWidth, nRegionSize // 8):
+            arrDcDct[nRow:nRow + nRegionSize // 8, nCol:nCol + nRegionSize // 8] = matIct.T @ arrDcDct[nRow:nRow + nRegionSize // 8, nCol:nCol + nRegionSize // 8] @ matIct
 
     arrDcMask = np.zeros_like(arrDcDct, dtype=bool)
-    for nRow in range(0, nDcHeight, nRegionSize//8):
-        for nCol in range(0, nDcWidth, nRegionSize//8):
-            for i in range(nRegionSize//8):
-                for j in range(nRegionSize//8):
+    for nRow in range(0, nDcHeight, nRegionSize // 8):
+        for nCol in range(0, nDcWidth, nRegionSize // 8):
+            for i in range(nRegionSize // 8):
+                for j in range(nRegionSize // 8):
                     if matZigzag[i, j] >= nStartIndex - nSpan + 1 and matZigzag[i, j] <= nStartIndex:
                         arrDcMask[nRow + i, nCol + j] = True
 
@@ -136,13 +133,10 @@ def OptimizationBasedAttack(
 
     # ICT and Zigzag
     matIct = np.zeros((nRegionSize // 8, nRegionSize // 8), dtype=np.float64)
-    matZigzag = np.zeros((nRegionSize // 8, nRegionSize // 8), dtype=np.float64)
     if nRegionSize == 64:
         matIct = matIct_8
-        matZigzag = arrZigZag_8
     elif nRegionSize == 128:
         matIct = matIct_16
-        matZigzag = arrZigZag_16
 
     # 计算像素贡献矩阵并分离已知和未知部分
     arrContributionMatrix = ComputeContributionMatrix().reshape(8 * 8, 8 * 8)
@@ -179,18 +173,19 @@ def OptimizationBasedAttack(
     nDcHeight, nDcWidth = arrDcDct.shape
     arrFullDc = np.zeros(arrDcDct.shape, dtype=gp.LinExpr)
     arrDiag = np.linalg.inv(matIct @ matIct.T)
-    for nRow in range(0, nDcHeight, nRegionSize//8):
-        for nCol in range(0, nDcWidth, nRegionSize//8):
-            arrFullDc[nRow:nRow + nRegionSize//8, nCol:nCol + nRegionSize//8] += arrDiag @ matIct @ arrDcDct[nRow:nRow + nRegionSize//8, nCol:nCol + nRegionSize//8] @ matIct.T @ arrDiag
+    for nRow in range(0, nDcHeight, nRegionSize // 8):
+        for nCol in range(0, nDcWidth, nRegionSize // 8):
+            arrFullDc[nRow:nRow + nRegionSize // 8, nCol:nCol + nRegionSize // 8] += arrDiag @ matIct @ arrDcDct[nRow:nRow + nRegionSize // 8,
+                                                                                                        nCol:nCol + nRegionSize // 8] @ matIct.T @ arrDiag
 
-            arrRecoveredDcAc = np.zeros((nRegionSize//8, nRegionSize//8), dtype=gp.LinExpr)
-            for i in range(nRegionSize//8):
-                for j in range(nRegionSize//8):
+            arrRecoveredDcAc = np.zeros((nRegionSize // 8, nRegionSize // 8), dtype=gp.LinExpr)
+            for i in range(nRegionSize // 8):
+                for j in range(nRegionSize // 8):
                     if arrDcAcMask[nRow + i, nCol + j]:
                         arrRecoveredDcAc[i, j] = arrVarMissingDcAc[nIndex]
                         nIndex += 1
 
-            arrFullDc[nRow:nRow + nRegionSize//8, nCol:nCol + nRegionSize//8] += arrDiag @ matIct @ arrRecoveredDcAc @ matIct.T @ arrDiag
+            arrFullDc[nRow:nRow + nRegionSize // 8, nCol:nCol + nRegionSize // 8] += arrDiag @ matIct @ arrRecoveredDcAc @ matIct.T @ arrDiag
 
     # 将DcDct还原至Dct
     for nRow in range(0, nHeight, 8):
@@ -217,18 +212,19 @@ def OptimizationBasedAttack(
 
     nIndex = 0
     arrFullDc = np.zeros_like(arrDcDct, dtype=np.float64)
-    for nRow in range(0, nDcHeight, nRegionSize//8):
-        for nCol in range(0, nDcWidth, nRegionSize//8):
-            arrFullDc[nRow:nRow + nRegionSize//8, nCol:nCol + nRegionSize//8] += arrDiag @ matIct @ arrDcDct[nRow:nRow + nRegionSize//8, nCol:nCol + nRegionSize//8] @ matIct.T @ arrDiag
+    for nRow in range(0, nDcHeight, nRegionSize // 8):
+        for nCol in range(0, nDcWidth, nRegionSize // 8):
+            arrFullDc[nRow:nRow + nRegionSize // 8, nCol:nCol + nRegionSize // 8] += arrDiag @ matIct @ arrDcDct[nRow:nRow + nRegionSize // 8,
+                                                                                                        nCol:nCol + nRegionSize // 8] @ matIct.T @ arrDiag
 
-            arrRecoveredDcAc = np.zeros((nRegionSize//8, nRegionSize//8), dtype=np.float64)
-            for i in range(nRegionSize//8):
-                for j in range(nRegionSize//8):
+            arrRecoveredDcAc = np.zeros((nRegionSize // 8, nRegionSize // 8), dtype=np.float64)
+            for i in range(nRegionSize // 8):
+                for j in range(nRegionSize // 8):
                     if arrDcAcMask[nRow + i, nCol + j]:
                         arrRecoveredDcAc[i, j] = arrRecoveredDcDct[nIndex]
                         nIndex += 1
 
-            arrFullDc[nRow:nRow + nRegionSize//8, nCol:nCol + nRegionSize//8] += arrDiag @ matIct @ arrRecoveredDcAc @ matIct.T @ arrDiag
+            arrFullDc[nRow:nRow + nRegionSize // 8, nCol:nCol + nRegionSize // 8] += arrDiag @ matIct @ arrRecoveredDcAc @ matIct.T @ arrDiag
 
     # 将DcDct还原至Dct
     for nRow in range(0, nHeight, 8):
@@ -286,7 +282,8 @@ for RegionSize in tqdm(os.listdir(strRoot)):
             strOutputImagePath = os.path.join(strSTRoot, strImageName[:strImageName.rfind(".")] + "_OA.bmp")
 
             # 针对CipherImage 进行优化攻击
-            arrDCT, arrMask, arrDcDct, arrDcMask = PreProcess(strCipherImagePath, int(RegionSize[RegionSize.find("=") + 1:]), int(ST[ST.find("=") + 1:]), int(ST[ST.find("=") + 1:]))
+            arrDCT, arrMask, arrDcDct, arrDcMask = PreProcess(strCipherImagePath, int(RegionSize[RegionSize.find("=") + 1:]), int(os.listdir(strQFRoot)[0][ST.find("=") + 1:]),
+                                                              int(ST[ST.find("=") + 1:]))
             arrRecoveredImage = OptimizationBasedAttack(int(RegionSize[RegionSize.find("=") + 1:]), arrDCT, arrMask, arrDcDct, arrDcMask)
             cv.imwrite(strOutputImagePath, arrRecoveredImage)
 
