@@ -252,86 +252,36 @@ def OptimizationBasedAttack(
                         arrFullPixel[nRow:nRow + 8, nCol:nCol + 8] += (
                                 arrDct[nRow + i:nRow + i + 1, nCol + j:nCol + j + 1] @ arrContributionMatrix[:, i * 8 + j:i * 8 + j + 1].T).flatten().reshape(8, 8)
     return (arrFullPixel + 128).clip(0, 255)
-
-
-# DC Encryption
-strImageName = "Peppers.bmp"
+# AC Encryption
+strSrcImageName = "zelda.bmp"
+strDstImageName = "zelda_ST=20.jpg"
 strSrcImgPath = r"C:\Users\kzzz3\Desktop\Result\InputImage"
-strDstImgPath = r"C:\Users\kzzz3\Desktop\Result\OutputImage\DcEncryption"
+strDstImgPath = r"C:\Users\kzzz3\Desktop\Fig\SecurityAnalysis"
 
-dictPSNR = {}
-dictSSIM = {}
-dictCipherPSNR = {}
-dictCipherSSIM = {}
-strRoot = strDstImgPath
-for RegionSize in tqdm(os.listdir(strRoot)):
-    dictPSNR[int(RegionSize[RegionSize.find("=") + 1:])] = {}
-    dictSSIM[int(RegionSize[RegionSize.find("=") + 1:])] = {}
-    dictCipherPSNR[int(RegionSize[RegionSize.find("=") + 1:])] = {}
-    dictCipherSSIM[int(RegionSize[RegionSize.find("=") + 1:])] = {}
-    strRegionSizeRoot = os.path.join(strRoot, RegionSize)
+strPlainImagePath = os.path.join(strSrcImgPath, strSrcImageName)
+strCipherImagePath = os.path.join(strDstImgPath, strDstImageName)
+strOutputImagePath = os.path.join(strDstImgPath, strDstImageName[:strDstImageName.rfind(".")] + "_OA.bmp")
 
-    arrQFs = os.listdir(strRegionSizeRoot)
-    for QF in tqdm(arrQFs):
-        dictPSNR[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])] = {}
-        dictSSIM[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])] = {}
-        dictCipherPSNR[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])] = {}
-        dictCipherSSIM[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])] = {}
-        strQFRoot = os.path.join(strRegionSizeRoot, QF)
-        strSpanRoot = os.path.join(strQFRoot, os.listdir(strQFRoot)[0])
+if not os.path.exists(strDstImgPath):
+    # 针对CipherImage 进行优化攻击
+    arrDCT, arrMask, arrDcDct, arrDcMask = PreProcess(strCipherImagePath, 128, 72, 50)
+    arrRecoveredImage = OptimizationBasedAttack(128, arrDCT, arrMask, arrDcDct, arrDcMask)
+    cv.imwrite(strOutputImagePath, arrRecoveredImage)
 
-        arrSTs = os.listdir(strSpanRoot)
-        for Span in tqdm(arrSTs):
-            strSTRoot = os.path.join(strSpanRoot, Span)
+print(strSrcImageName)
 
-            strPlainImagePath = os.path.join(strSrcImgPath, strImageName)
-            strCipherImagePath = os.path.join(strSTRoot, strImageName[:strImageName.rfind(".")] + ".jpg")
-            strOutputImagePath = os.path.join(strSTRoot, strImageName[:strImageName.rfind(".")] + "_OA.bmp")
+# 计算图像psnr 和 ssim
+imgPlain = io.imread(strPlainImagePath)
+imgCipher = io.imread(strCipherImagePath)
+imgOutput = io.imread(strOutputImagePath)
+psnr = peak_signal_noise_ratio(imgCipher, imgPlain)
+ssim = structural_similarity(imgCipher, imgPlain)
 
-            if not os.path.exists(strOutputImagePath):
-                # 针对CipherImage 进行优化攻击
-                arrDCT, arrMask, arrDcDct, arrDcMask = PreProcess(strCipherImagePath, int(RegionSize[RegionSize.find("=") + 1:]), int(os.listdir(strQFRoot)[0][Span.find("=") + 1:]),
-                                                                  int(Span[Span.find("=") + 1:]))
-                arrRecoveredImage = OptimizationBasedAttack(int(RegionSize[RegionSize.find("=") + 1:]), arrDCT, arrMask, arrDcDct, arrDcMask)
-                cv.imwrite(strOutputImagePath, arrRecoveredImage)
+print("PSNR:",psnr)
+print("SSIM:",ssim)
 
-            # 计算图像psnr 和 ssim
-            imgSrc = io.imread(strPlainImagePath)
-            imgDst = io.imread(strOutputImagePath)
-            imgCipher = io.imread(strCipherImagePath)
-            psnr = peak_signal_noise_ratio(imgDst, imgSrc)
-            ssim = structural_similarity(imgDst, imgSrc)
-            cipher_psnr = peak_signal_noise_ratio(imgCipher, imgSrc)
-            cipher_ssim = structural_similarity(imgCipher, imgSrc)
+psnr = peak_signal_noise_ratio(imgOutput, imgPlain)
+ssim = structural_similarity(imgOutput, imgPlain)
 
-            dictPSNR[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])][int(Span[Span.find("=") + 1:])] = psnr
-            dictSSIM[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])][int(Span[Span.find("=") + 1:])] = ssim
-            dictCipherPSNR[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])][int(Span[Span.find("=") + 1:])] = cipher_psnr
-            dictCipherSSIM[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])][int(Span[Span.find("=") + 1:])] = cipher_ssim
-
-# draw the result
-arrRegionSizes = [RegionSize for RegionSize in list(dictPSNR.keys())]
-arrQFs = {RegionSize: [QF for QF in list(dictPSNR[RegionSize].keys())] for RegionSize in arrRegionSizes}
-arrSTs = {RegionSize: {QF: [ST for ST in list(dictPSNR[RegionSize][QF].keys())] for QF in arrQFs[RegionSize]} for RegionSize in arrRegionSizes}
-
-arrRegionSizes.sort()
-arrQFs = {key: sorted(value) for key, value in arrQFs.items()}
-arrSTs = {RegionSize: {key: sorted(value) for key, value in value.items()} for RegionSize, value in arrSTs.items()}
-
-# for RegionSize in arrRegionSizes:
-#     print("RegionSize=" + str(RegionSize))
-#     for QF in arrQFs[RegionSize]:
-#         print("QF=" + str(QF))
-#         print("PSNR:")
-#         for Span in arrSTs[RegionSize][QF]:
-#             print(Span, round(dictPSNR[RegionSize][QF][Span], 3), r"\\")
-#         print("SSIM:")
-#         for Span in arrSTs[RegionSize][QF]:
-#             print(Span, round(dictSSIM[RegionSize][QF][Span], 3), r"\\")
-
-for RegionSize in arrRegionSizes:
-    print("RegionSize=" + str(RegionSize))
-    for QF in arrQFs[RegionSize]:
-        print("QF=" + str(QF))
-        for Span in arrSTs[RegionSize][QF]:
-            print(Span, round(dictCipherPSNR[RegionSize][QF][Span], 6), "&", round(dictCipherSSIM[RegionSize][QF][Span], 6), "&", round(dictPSNR[RegionSize][QF][Span], 6), "&", round(dictSSIM[RegionSize][QF][Span], 6), r"\\")
+print("PSNR:",psnr)
+print("SSIM:",ssim)

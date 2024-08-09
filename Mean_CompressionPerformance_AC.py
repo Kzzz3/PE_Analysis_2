@@ -14,7 +14,6 @@ def CaculateBPP(strImagePath):
         bpp = file_size / total_pixels
         return bpp
 
-strImageName = "barbara_gray.bmp"
 strSrcImgPath = r"C:\Users\kzzz3\Desktop\Result\InputImage"
 strDstImgPath = r"C:\Users\kzzz3\Desktop\Result\OutputImage\AcEncryption"
 
@@ -29,12 +28,19 @@ for QF in arrQFs:
     arrSTs = os.listdir(strQFRoot)
     for ST in arrSTs:
         strSTRoot = os.path.join(strQFRoot, ST)
-        strImgPath = os.path.join(strSTRoot, strImageName[:strImageName.rfind(".")] + ".jpg")
 
+        BPPs = []
+        for strImageName in os.listdir(strSrcImgPath):
+            strImgPath = os.path.join(strSTRoot, strImageName[:strImageName.rfind(".")] + ".jpg")
+            if not os.path.exists(strImgPath):
+                continue
+            BPPs.append(CaculateBPP(strImgPath))
+
+        dAvgBPP = sum(BPPs) / len(BPPs)
         if ST == "ST=64":
-            dictPlainResult[int(QF[QF.find("=")+1:])] = CaculateBPP(strImgPath)
+            dictPlainResult[int(QF[QF.find("=") + 1:])] = dAvgBPP
 
-        dictResult[int(QF[QF.find("=")+1:])][int(ST[ST.find("=")+1:])] = CaculateBPP(strImgPath)
+        dictResult[int(QF[QF.find("=") + 1:])][int(ST[ST.find("=") + 1:])] = dAvgBPP
 
 #draw the result
 arrQFs = [ QF for QF in list(dictResult.keys())]
@@ -50,10 +56,10 @@ for QF in arrQFs:
         print(ST, round(dictPlainResult[QF],3),r'\\')
 
 
-# for QF in arrQFs:
-#     print("QF="+str(QF))
-#     for ST in arrSTs:
-#         print(ST, round((dictResult[QF][ST]-dictPlainResult[QF])/dictPlainResult[QF]*1000,3), r"\\")
+for QF in arrQFs:
+    print("QF="+str(QF))
+    for ST in arrSTs:
+        print(ST, round((dictResult[QF][ST]-dictPlainResult[QF])/dictPlainResult[QF]*1000,3), r"\\")
 
 # for QF in arrQFs:
 #     plt.plot(arrSTs, [dictResult[QF][ST] for ST in arrSTs], label="QF="+str(QF))

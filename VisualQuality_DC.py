@@ -4,7 +4,7 @@ from skimage import io
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 
 # AC Encryption
-strImageName = "Baboon.bmp"
+strImageName = "barbara_gray.bmp"
 strSrcImgPath = r"C:\Users\kzzz3\Desktop\Result\InputImage"
 strDstImgPath = r"C:\Users\kzzz3\Desktop\Result\OutputImage\DcEncryption"
 
@@ -56,6 +56,6 @@ for RegionSize in arrRegionSizes:
         print("PSNR:")
         for ST in arrSTs[RegionSize][QF]:
             print(ST, round(dictPSNR[RegionSize][QF][ST],3),r"\\")
-        print("SSIM:")
-        for ST in arrSTs[RegionSize][QF]:
-            print(ST, round(dictSSIM[RegionSize][QF][ST],3),r"\\")
+        # print("SSIM:")
+        # for ST in arrSTs[RegionSize][QF]:
+        #     print(ST, round(dictSSIM[RegionSize][QF][ST],3),r"\\")

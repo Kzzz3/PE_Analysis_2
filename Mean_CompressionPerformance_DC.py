@@ -14,7 +14,7 @@ def CaculateBPP(strImagePath):
         bpp = file_size / total_pixels
         return bpp
 
-strImageName = "barbara_gray.bmp"
+
 strSrcImgPath = r"C:\Users\kzzz3\Desktop\Result\InputImage"
 strDstImgPath = r"C:\Users\kzzz3\Desktop\Result\OutputImage\DcEncryption"
 
@@ -33,9 +33,14 @@ for RegionSize in os.listdir(strDstImgPath):
         arrSTs = os.listdir(strSpanRoot)
         for ST in arrSTs:
             strSTRoot = os.path.join(strSpanRoot, ST)
-            strImgPath = os.path.join(strSTRoot, strImageName[:strImageName.rfind(".")] + ".jpg")
 
-            dictResult[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])][int(ST[ST.find("=") + 1:])] = CaculateBPP(strImgPath)
+            BPPs = []
+            for strImageName in os.listdir(strSrcImgPath):
+                strImgPath = os.path.join(strSTRoot, strImageName[:strImageName.rfind(".")] + ".jpg")
+                if not os.path.exists(strImgPath):
+                    continue
+                BPPs.append(CaculateBPP(strImgPath))
+            dictResult[int(RegionSize[RegionSize.find("=") + 1:])][int(QF[QF.find("=") + 1:])][int(ST[ST.find("=") + 1:])] = sum(BPPs) / len(BPPs)
 
 #draw the result
 arrRegionSizes = [ RegionSize for RegionSize in list(dictResult.keys())]
@@ -53,7 +58,7 @@ for RegionSize in arrRegionSizes:
         for ST in arrSTs[RegionSize][QF]:
             print(ST, round(dictResult[RegionSize][QF][ST],3),r"\\")
 
-
+#2.409 1.300 0.938 0.664
 
 
 # arrQFs = os.listdir(strDstImgPath)

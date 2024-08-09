@@ -51,7 +51,7 @@ def PreProcess(strInputImagePath,nST):
         for nCol in range(0, nWidth, 8):
             for i in range(8):
                 for j in range(8):
-                    if arrZigZag[i, j] >= nST and arrZigZag[i, j] <= 40:
+                    if arrZigZag[i, j] >= nST:
                         arrMask[nRow + i, nCol + j] = True
     return arrDCT,arrMask
 
@@ -122,72 +122,35 @@ def OptimizationBasedAttack(
     return (arrFullPixel + 128).clip(0, 255)
 
 # AC Encryption
-strImageName = "Peppers.bmp"
+strSrcImageName = "zelda.bmp"
+strDstImageName = "zelda_ST=20.jpg"
 strSrcImgPath = r"C:\Users\kzzz3\Desktop\Result\InputImage"
-strDstImgPath = r"C:\Users\kzzz3\Desktop\Result\OutputImage\AcEncryption"
-
-dictPSNR = {}
-dictSSIM = {}
-dictCipherPSNR = {}
-dictCipherSSIM = {}
-strRoot = strDstImgPath
-arrQFs = os.listdir(strDstImgPath)
-for QF in tqdm(arrQFs):
-    dictPSNR[int(QF[QF.find("=") + 1:])] = {}
-    dictSSIM[int(QF[QF.find("=") + 1:])] = {}
-    dictCipherPSNR[int(QF[QF.find("=") + 1:])] = {}
-    dictCipherSSIM[int(QF[QF.find("=") + 1:])] = {}
-
-    strQFRoot = os.path.join(strRoot, QF)
-    arrSTs = os.listdir(strQFRoot)
-    for ST in tqdm(arrSTs):
-        nQF = int(QF[QF.find("=") + 1:])
-        nST = int(ST[ST.find("=") + 1:])
-
-        strSTRoot = os.path.join(strQFRoot, ST)
-
-        strPlainImagePath = os.path.join(strSrcImgPath, strImageName)
-        strCipherImagePath = os.path.join(strSTRoot, strImageName[:strImageName.rfind(".")] + ".jpg")
-        strOutputImagePath = os.path.join(strSTRoot, strImageName[:strImageName.rfind(".")] + "_OA.bmp")
-
-        if not os.path.exists(strCipherImagePath):
-            #针对CipherImage 进行优化攻击
-            arrDCT,arrMask = PreProcess(strCipherImagePath,nST)
-            arrRecoveredImage = OptimizationBasedAttack(arrDCT,arrMask)
-            cv.imwrite(strOutputImagePath, arrRecoveredImage)
+strDstImgPath = r"C:\Users\kzzz3\Desktop\Fig\SecurityAnalysis"
 
 
-        # 计算图像psnr 和 ssim
-        imgSrc = io.imread(strPlainImagePath)
-        imgDst = io.imread(strOutputImagePath)
-        imgCipher = io.imread(strCipherImagePath)
-        psnr = peak_signal_noise_ratio(imgDst, imgSrc)
-        ssim = structural_similarity(imgDst, imgSrc)
+strPlainImagePath = os.path.join(strSrcImgPath, strSrcImageName)
+strCipherImagePath = os.path.join(strDstImgPath, strDstImageName)
+strOutputImagePath = os.path.join(strDstImgPath, strDstImageName[:strDstImageName.rfind(".")] + "_OA.bmp")
 
-        cipher_psnr = peak_signal_noise_ratio(imgCipher, imgSrc)
-        cipher_ssim = structural_similarity(imgCipher, imgSrc)
+#针对CipherImage 进行优化攻击
+if not os.path.exists(strOutputImagePath):
+    arrDCT,arrMask = PreProcess(strCipherImagePath,20)
+    arrRecoveredImage = OptimizationBasedAttack(arrDCT,arrMask)
+    cv.imwrite(strOutputImagePath, arrRecoveredImage)
 
-        dictPSNR[int(QF[QF.find("=")+1:])][int(ST[ST.find("=")+1:])] = psnr
-        dictSSIM[int(QF[QF.find("=")+1:])][int(ST[ST.find("=")+1:])] = ssim
 
-        dictCipherPSNR[int(QF[QF.find("=")+1:])][int(ST[ST.find("=")+1:])] = cipher_psnr
-        dictCipherSSIM[int(QF[QF.find("=")+1:])][int(ST[ST.find("=")+1:])] = cipher_ssim
+# 计算图像psnr 和 ssim
+imgPlain = io.imread(strPlainImagePath)
+imgCipher = io.imread(strCipherImagePath)
+imgOutput = io.imread(strOutputImagePath)
+psnr = peak_signal_noise_ratio(imgCipher, imgPlain)
+ssim = structural_similarity(imgCipher, imgPlain)
 
-#draw the result
-arrQFs = [ QF for QF in list(dictPSNR.keys())]
-arrSTs = [ ST for ST in list(dictPSNR.values())[0]]
-arrSTs.sort()
+print("PSNR:",psnr)
+print("SSIM:",ssim)
 
-# for QF in arrQFs:
-#     print("QF="+str(QF))
-#     print("PSNR:")
-#     for ST in arrSTs:
-#         print(ST, round(dictCipherPSNR[QF][ST],6),"&",round(dictPSNR[QF][ST],6),r"\\")
-#     print("SSIM:")
-#     for ST in arrSTs:
-#         print(ST, round(dictCipherSSIM[QF][ST],6),"&",round(dictSSIM[QF][ST],6),r"\\")
+psnr = peak_signal_noise_ratio(imgOutput, imgPlain)
+ssim = structural_similarity(imgOutput, imgPlain)
 
-for QF in arrQFs:
-    print("QF="+str(QF))
-    for ST in arrSTs:
-        print(ST, round(dictCipherPSNR[QF][ST],6),"&",round(dictCipherSSIM[QF][ST],6),"&",round(dictPSNR[QF][ST],6),"&",round(dictSSIM[QF][ST],6),r"\\")
+print("PSNR:",psnr)
+print("SSIM:",ssim)
